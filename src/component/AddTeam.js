@@ -50,7 +50,7 @@ const AddTeam = () => {
 
     return (
         <>
-            <Fab color="primary" aria-label="add" onClick={handleShow}>
+            <Fab color="primary" style={{textAlign:"left"}} aria-label="add" onClick={handleShow}>
                 <AddIcon />
             </Fab>
 

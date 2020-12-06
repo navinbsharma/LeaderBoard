@@ -57,3 +57,23 @@ export function getAjaxDataCall(api, inputParamJSON, callbackFn) {
 
 }
 
+export function putAjaxCall(api,params,callbackFn){
+  const options = {
+    method: 'PUT',
+    url: api,
+    data: params,
+  };
+
+  axios.request(options).then(function (response) {
+    console.log(response);
+    if (callbackFn) {
+      callbackFn(response, null)
+    } else {
+      return response.data
+    }
+  }).catch(function (error) {
+    return error;
+  });
+
+}
+

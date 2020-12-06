@@ -74,7 +74,7 @@ const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
     { id: 'wins', numeric: true, disablePadding: false, label: 'Wins' },
     { id: 'losses', numeric: true, disablePadding: false, label: 'Losses' },
-    { id: 'socre', numeric: true, disablePadding: false, label: 'Score' },
+    { id: 'score', numeric: true, disablePadding: false, label: 'Score' },
     { id: 'ties', numeric: true, disablePadding: false, label: 'Ties' },
 ];
 
@@ -154,7 +154,6 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
-    console.log(props);
 
     return (
         <Toolbar
@@ -222,8 +221,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnhancedTable() {
     const classes = useStyles();
-    const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('calories');
+    const [order, setOrder] = React.useState('desc');
+    const [orderBy, setOrderBy] = React.useState('score');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
@@ -244,7 +243,6 @@ export default function EnhancedTable() {
 
                 } else {
                     const temp = [];
-                    console.log(callback.data);
                     temp.push(callback.data.map(row => {
                         return {
                             'id': row._id,
@@ -252,18 +250,16 @@ export default function EnhancedTable() {
                             'wins': row.wins,
                             'losses': row.losses,
                             'ties': row.ties,
+                            'score': row.score,
                         }
                     }));
                     setRowData(temp[0]);
-
-
-
                 }
             } else {
                 // setResultFetch(false);
             }
         });
-    },[])
+    },[rows])
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -364,10 +360,10 @@ export default function EnhancedTable() {
                                             <TableCell component="th" id={labelId} scope="row" padding="none">
                                                 {row.name}
                                             </TableCell>
-                                            <TableCell align="right">{row.calories}</TableCell>
-                                            <TableCell align="right">{row.fat}</TableCell>
-                                            <TableCell align="right">{row.carbs}</TableCell>
-                                            <TableCell align="right">{row.protein}</TableCell>
+                                            <TableCell align="right">{row.wins}</TableCell>
+                                            <TableCell align="right">{row.losses}</TableCell>
+                                            <TableCell align="right">{row.score}</TableCell>
+                                            <TableCell align="right">{row.ties}</TableCell>
                                         </TableRow>
                                     );
                                 })}
